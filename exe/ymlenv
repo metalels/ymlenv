@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+require 'ymlenv'
+require 'optparse'
+
+Version = Ymlenv::VERSION
+
+usage = <<-EOS
+YAML enviroments decoder.
+
+ usage: ymlenv [options] YAML_FILE
+          or can also use Input-redirect
+        ymlenv [options] < YAML_FILE
+          or can also use Pipe
+        cat YAML_FILE | ymlenv [options]
+ options:
+EOS
+
+OptionParser.new do |opt|
+  opt.banner = usage
+  opt.on('-i', 'Overwrite yaml file.') {|v| Ymlenv.options[:overwrite] = true}
+  opt.on('--nosymborize', 'Disable auto symborize keys.') {|v| Ymlenv.options[:symborize] = false}
+  opt.on('--json', 'Output Json format [low priority]') {|v| Ymlenv.options[:json] = v}
+  opt.on('--debug', 'Enable debug print') {|v| Ymlenv.options[:debug] = v}
+  args = opt.parse!(ARGV)
+  if args.length == 1
+    Ymlenv.options[:file] = args.pop
+  else
+    bodies = []
+    while line = STDIN.gets
+      bodies << line
+    end
+
+    Ymlenv.options[:body] = bodies.join
+    if Ymlenv.options[:body].length == 0
+      puts opt
+      exit
+    end
+  end
+end
+
+
+puts Ymlenv.exec_with_format

@@ -1,0 +1,8 @@
+production:
+  home1: /home/travis
+  home2: /home/travis
+  test_val1: test1_test2_test3_test4
+  test_val2: test1_test2_test3_DUMMY_test4
+  test_val3: test1_test2_test3_DUMMY_test4
+  test_val4: test1_test2_${YMLENV_ENVIROMENT_TEST}_VALUE_DUMMY_test4
+

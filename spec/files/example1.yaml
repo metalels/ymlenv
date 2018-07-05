@@ -1,0 +1,8 @@
+production:
+  home1: $HOME
+  home2: ${HOME}
+  test_val1: test1_test2_$YMLENV_ENVIROMENT_TEST_VALUE_test4
+  test_val2: test1_test2_$YMLENV_ENVIROMENT_TEST_VALUE_DUMMY_test4
+  test_val3: test1_test2_${YMLENV_ENVIROMENT_TEST_VALUE}_DUMMY_test4
+  test_val4: test1_test2_${YMLENV_ENVIROMENT_TEST}_VALUE_DUMMY_test4
+
